@@ -14,6 +14,7 @@ goalPerHour = goalPerDay/24
 buffer = 2/24
 
 currentWeight = float(input("Enter your current weight: "))
+
 currentDate = time.localtime()
 
 try:
@@ -29,10 +30,13 @@ except:
     f.close()
     pass
 
+f = open("startDate.txt", "a+")
+f.write(str(currentWeight)+","+str(currentDate[0])+","+str(currentDate[1])+","+str(currentDate[2])+","+"\n")
+f.close()
 
 
 f = open("startDate.txt", "r")
-startDate = f.read().split(",")
+startDate = f.read().splitlines()[0].split(",")
 f.close()
 
 startDate.pop()
@@ -40,7 +44,7 @@ for i in range(len(startDate) - 1):
     startDate[i] = int(startDate[i])
 
     
-# print(startDate)
+print(startDate)
 # print(currentDate)
 
 
