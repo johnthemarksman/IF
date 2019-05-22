@@ -1,3 +1,4 @@
+import time
 import kivy
 from kivy.app import App
 from kivy.uix.label import Label
@@ -5,6 +6,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 # to use buttons:
 from kivy.uix.button import Button
+from kivy.clock import Clock
 from kivy.uix.screenmanager import ScreenManager, Screen
 #import socket_client
 
@@ -35,13 +37,17 @@ class ConnectPage(GridLayout):
         self.add_widget(Label(text='Username:'))
         self.username = TextInput(text=prev_username, multiline=False)
         self.add_widget(self.username)
+        
+        self.time = time.localtime()
+        print (self.time)
+
 
         # add our button.
-        self.join = Button(text="Join")
+        self.join = Button(text=str(self.time))
         self.join.bind(on_press=self.join_button)
         self.add_widget(Label())  # just take up the spot.
         self.add_widget(self.join)
-
+        
     def join_button(self, instance):
         port = self.port.text
         ip = self.ip.text
